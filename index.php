@@ -11,6 +11,7 @@
 <body>
 	<?php
 
+
 		if(isset($_POST['add']) ){
 
 			 $name = $_POST['name'];
@@ -21,7 +22,16 @@
 			 $age = $_POST['age'];
 
 			$cell_len = strlen($cell);
+		
 
+			$file_name = $_FILES['photo']['name'];
+			$file_size = $_FILES['photo']['size'];
+			$file_type = $_FILES['photo']['type'];
+			$file_tmp = $_FILES['photo']['tmp_name'];
+
+			$unique_file_name = md5(time().rand()). $file_name;
+
+			move_uploaded_file($file_tmp,'photo/'. $unique_file_name ); 
 
 			if(empty($name) || empty($roll) || empty($email) || empty($cell) || empty($uname) || empty($age)){
 				$msg = '<p class="alert alert-danger">All fields are reqired! <button class="close" data-dismiss="alert">&times;</button></p>';
